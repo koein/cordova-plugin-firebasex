@@ -104,7 +104,9 @@ static bool authStateChangeListenerInitialized = false;
     }@catch (NSException *exception) {
         [FirebasePlugin.firebasePlugin handlePluginExceptionWithoutContext:exception];
     }
-
+        NSMutableArray *newArguments = [NSMutableArray arrayWithArray:[[NSProcessInfo processInfo] arguments]];
+        [newArguments addObject:@"-FIRDebugEnabled"];
+        [[NSProcessInfo processInfo] setValue:[newArguments copy] forKey:@"arguments"];
     return YES;
 }
 
